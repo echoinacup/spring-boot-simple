@@ -20,11 +20,11 @@ public class AppConfig {
         return DataSourceBuilder.create().build();
     }
 
-//    @Bean
-//    @ConfigurationProperties(prefix = "spring.second-datasource")
-//    public DataSource secondaryDataSource() {
-//        return DataSourceBuilder.create().build();
-//    }
+    @Bean
+    @ConfigurationProperties(prefix = "spring.second-datasource")
+    public DataSource secondaryDataSource() {
+        return DataSourceBuilder.create().build();
+    }
 
 /*
     So we can call hen you can use it like
