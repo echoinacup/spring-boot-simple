@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+    <changeSet id="1" author="Nik K">
+        <sql dbms="echodb" endDelimiter=";">
+            CREATE SCHEMA mySchema
+        </sql>
+        <createTable tableName="author">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="author_id_pk"/>
+            </column>
+            <column name="name" type="varchar(250)"/>
+            <column name="surname" type="varchar(250)"/>
+        </createTable>
+        <createTable tableName="book">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="book_id_pk"/>
+            </column>
+            <column name="title" type="varchar(250)"/>
+            <column name="author_id" type="bigint">
+                <constraints nullable="false" notNullConstraintName="book_author_id_nn"/>
+            </column>
+        </createTable>
+        <addAutoIncrement tableName="author" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1"/>
+        <addAutoIncrement tableName="book" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1"/>
+        <createSequence sequenceName="hibernate_sequence" incrementBy="1" startValue="1"/>
+        <addForeignKeyConstraint baseTableName="book" baseColumnNames="author_id" constraintName="book_author_id_fk"
+                                 referencedTableName="author" referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="2" author="Nik K">
+        <sqlFile path="sql/data-init.sql"/>
+    </changeSet>
+</databaseChangeLog>
