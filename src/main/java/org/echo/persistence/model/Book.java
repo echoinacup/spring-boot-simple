@@ -14,8 +14,8 @@ public class Book {
     @Column(nullable = false, unique = true)
     private String title;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     // owning side. hat means that it defines the association and the Book entity just references it
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
     private Author author;
 
