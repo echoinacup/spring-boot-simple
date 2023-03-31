@@ -2,23 +2,20 @@
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
-        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
-        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
     <changeSet id="1" author="Nik K">
-        <sql dbms="echodb" endDelimiter=";">
-            CREATE SCHEMA mySchema
-        </sql>
         <createTable tableName="author">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" primaryKeyName="author_id_pk"/>
             </column>
-            <column name="name" type="varchar(250)"/>
-            <column name="surname" type="varchar(250)"/>
+            <column name="author_name" type="varchar(250)">
+                <constraints nullable="false" unique="true"/>
+            </column>
         </createTable>
+        <createIndex indexName="index_name" tableName="author">
+            <column name="author_name"/>
+        </createIndex>
         <createTable tableName="book">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" primaryKeyName="book_id_pk"/>

@@ -9,4 +9,4 @@ projectName.iml
 /local.properties
 target/
 
-secret.properties
+src/main/resources/secret.properties

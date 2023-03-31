@@ -12,10 +12,8 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
     private long id;
-    @Column(nullable = false)
-    private String name;
-    @Column(nullable = false)
-    private String surname;
+    @Column(name = "author_name", nullable = false, unique = true)
+    private String authorName;
 
     @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
     private Set<Book> books = new HashSet<>();
@@ -23,10 +21,8 @@ public class Author {
     public Author() {
     }
 
-    public Author(long id, String name, String surname) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
+    public Author(String authorName) {
+        this.authorName = authorName;
     }
 
     public void addBook(Book book) {
@@ -47,20 +43,12 @@ public class Author {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getAuthorName() {
+        return authorName;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
 
     public Set<Book> getBooks() {

@@ -2,60 +2,57 @@ package org.echo.web.contoller;
 
 
 import org.echo.persistence.model.Book;
-import org.echo.persistence.repo.BookRepository;
-import org.echo.web.exception.BookIdMismatchException;
-import org.echo.web.exception.BookNotFoundException;
+import org.echo.service.BookService;
+import org.echo.web.contoller.dto.BookDto;
+import org.echo.web.contoller.mappers.BookMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/books")
+@RequestMapping("/api/v1/books")
 public class BookController {
 
-    private final BookRepository bookRepository;
+    private final BookService bookService;
+    private final BookMapper mapper;
 
-    public BookController(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
+    public BookController(BookService bookService, BookMapper mapper) {
+        this.bookService = bookService;
+        this.mapper = mapper;
     }
 
     @GetMapping
     public Iterable<Book> findAll() {
-        return bookRepository.findAll();
+        return bookService.findAll();
     }
 
     @GetMapping("/title/{bookTitle}")
     public List<Book> findByTitle(@PathVariable String bookTitle) {
-        return bookRepository.findByTitle(bookTitle);
+        return bookService.findByTitle(bookTitle);
     }
 
     @GetMapping("/{id}")
-    public Book findOne(@PathVariable Long id) {
-        return bookRepository.findById(id)
-                .orElseThrow(BookNotFoundException::new);
+    public BookDto findOne(@PathVariable Long id) {
+        var book = bookService.findBookById(id);
+        return mapper.bookToBookDto(book);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Book create(@RequestBody Book book) {
-        return bookRepository.save(book);
+    public BookDto create(@RequestBody BookDto book) {
+        var createdBook = bookService.creatBook(book);
+        return mapper.bookToBookDto(createdBook);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
-        bookRepository.findById(id)
-                .orElseThrow(BookNotFoundException::new);
-        bookRepository.deleteById(id);
+        bookService.deleteById(id);
     }
 
     @PutMapping("/{id}")
-    public Book updateBook(@RequestBody Book book, @PathVariable Long id) {
-        if (book.getId() != id) {
-            throw new BookIdMismatchException();
-        }
-        bookRepository.findById(id)
-                .orElseThrow(BookNotFoundException::new);
-        return bookRepository.save(book);
+    public BookDto updateBook(@RequestBody BookDto book, @PathVariable Long id) {
+        var updatedBook = bookService.updateBook(id, book);
+        return mapper.bookToBookDto(updatedBook);
     }
 }

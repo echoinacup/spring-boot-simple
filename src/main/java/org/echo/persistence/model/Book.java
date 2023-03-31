@@ -1,6 +1,7 @@
 package org.echo.persistence.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,9 +15,10 @@ public class Book {
     @Column(nullable = false, unique = true)
     private String title;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     // owning side. hat means that it defines the association and the Book entity just references it
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
+    @JsonBackReference
     private Author author;
 
     // Hibernate requires no-args constructor
