@@ -2,7 +2,8 @@ TODO
 
 3. one to many,  many to one cases to play around
 2. tests for db
-4. nested urls
-5. try optimisation from https://thorben-janssen.com/5-common-hibernate-mistakes-that-cause-dozens-of-unexpected-queries/
-6. effective java about optional
-7. maybe records to be used as dto
+4. nested urls +
+5. try optimisation from https://thorben-janssen.com/5-common-hibernate-mistakes-that-cause-dozens-of-unexpected-queries/ +
+6. effective java about optional +
+7. maybe records to be used as dto +
+8. validation for controllers

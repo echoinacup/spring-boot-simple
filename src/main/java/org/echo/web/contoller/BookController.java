@@ -3,8 +3,8 @@ package org.echo.web.contoller;
 
 import org.echo.persistence.model.Book;
 import org.echo.service.BookService;
-import org.echo.web.contoller.dto.BookDto;
-import org.echo.web.contoller.mappers.BookMapper;
+import org.echo.web.dto.BookDto;
+import org.echo.web.mappers.BookMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

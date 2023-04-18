@@ -3,7 +3,7 @@ package org.echo.service;
 
 import org.echo.persistence.model.Book;
 import org.echo.persistence.repo.BookRepository;
-import org.echo.web.contoller.dto.BookDto;
+import org.echo.web.dto.BookDto;
 import org.echo.web.exception.BookNotFoundException;
 import org.springframework.stereotype.Service;
 

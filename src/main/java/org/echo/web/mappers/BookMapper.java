@@ -1,7 +1,7 @@
-package org.echo.web.contoller.mappers;
+package org.echo.web.mappers;
 
 import org.echo.persistence.model.Book;
-import org.echo.web.contoller.dto.BookDto;
+import org.echo.web.dto.BookDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

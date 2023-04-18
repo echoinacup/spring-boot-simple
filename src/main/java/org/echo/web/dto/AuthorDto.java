@@ -1,4 +1,4 @@
-package org.echo.web.contoller.dto;
+package org.echo.web.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

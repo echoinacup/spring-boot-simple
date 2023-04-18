@@ -1,8 +1,8 @@
 package org.echo.web.contoller;
 
 import org.echo.service.AuthorBooksService;
-import org.echo.web.contoller.dto.BookDto;
-import org.echo.web.contoller.mappers.BookMapper;
+import org.echo.web.dto.BookDto;
+import org.echo.web.mappers.BookMapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
